@@ -3,8 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "latest",
+    "@material-ui/icons": "latest",
+    "firebase-tools": "^6.7.0",
+    "history": "4.7.2",
+    "prop-types": "latest",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-router-dom": "4.3.1",
     "react-scripts": "2.1.8"
   },
   "scripts": {
