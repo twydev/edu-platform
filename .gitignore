@@ -1,0 +1,4 @@
+# dependencies
+wpa-customer/node_modules
+wpa-customer/build
+wpa-customer/package-lock.json
