@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+
 import AppBar from '@material-ui/core/AppBar';
 import Drawer from '@material-ui/core/Drawer';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -9,7 +11,6 @@ import InputBase from '@material-ui/core/InputBase';
 import Badge from '@material-ui/core/Badge';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
-import { fade } from '@material-ui/core/styles/colorManipulator';
 import { withStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
@@ -23,7 +24,6 @@ import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
 
 import BookIcon from '@material-ui/icons/Book';
 import EventIcon from '@material-ui/icons/Event';
@@ -32,104 +32,26 @@ import RecordVoiceOverIcon from '@material-ui/icons/RecordVoiceOver';
 import CreditCardIcon from '@material-ui/icons/CreditCard';
 import InsertPhotoIcon from '@material-ui/icons/InsertPhoto';
 
-const drawerWidth = 240;
+import { styles } from './PrimarySearchAppBar_Styles'
 
-const styles = theme => ({
-  root: {
-    width: '100%',
-  },
-  appBar: {
-    zIndex: theme.zIndex.drawer + 200,
-  },
-  floatObj:{
-    zIndex: theme.zIndex.drawer + 400,
-  },
-  grow: {
-    flexGrow: 1,
-  },
-  menuButton: {
-    marginLeft: -12,
-    marginRight: 20,
-  },
-  title: {
-    display: 'none',
-    [theme.breakpoints.up('sm')]: {
-      display: 'block',
-    },
-  },
-  search: {
-    position: 'relative',
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: fade(theme.palette.common.white, 0.15),
-    '&:hover': {
-      backgroundColor: fade(theme.palette.common.white, 0.25),
-    },
-    marginRight: theme.spacing.unit * 2,
-    marginLeft: 0,
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      marginLeft: theme.spacing.unit * 3,
-      width: 'auto',
-    },
-  },
-  searchIcon: {
-    width: theme.spacing.unit * 9,
-    height: '100%',
-    position: 'absolute',
-    pointerEvents: 'none',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  inputRoot: {
-    color: 'inherit',
-    width: '100%',
-  },
-  inputInput: {
-    paddingTop: theme.spacing.unit,
-    paddingRight: theme.spacing.unit,
-    paddingBottom: theme.spacing.unit,
-    paddingLeft: theme.spacing.unit * 10,
-    transition: theme.transitions.create('width'),
-    width: '100%',
-    [theme.breakpoints.up('md')]: {
-      width: 200,
-    },
-  },
-  sectionDesktop: {
-    display: 'none',
-    [theme.breakpoints.up('md')]: {
-      display: 'flex',
-    },
-  },
-  sectionMobile: {
-    display: 'flex',
-    [theme.breakpoints.up('md')]: {
-      display: 'none',
-    },
-  },
-  drawer: {
-    width: drawerWidth,
-    flexShrink: 0,
-  },
-  drawerPaper: {
-    width: drawerWidth,
-  },
-  toolbar: theme.mixins.toolbar,
-});
-
-class SearchAppBar extends React.Component {
+class PrimarySearchAppBar extends React.Component {
+  
+  /***** COMPONENTS STATES *****/
+  
   state = {
     anchorEl: null,
     mobileMoreAnchorEl: null,
-    drawerOpen: false,
+    drawerEl: null,
   };
 
-  handleDrawerFlip = event => {
-    this.setState(prevState => ({
-      drawerOpen: !prevState.drawerOpen
-    })
-    );
+  /***** EVENT LISTENERS *****/ 
+  
+  handleDrawerOpen = event => {
+    this.setState({ drawerEl: event.currentTarget });
+  }
+
+  handleDrawerClose = () => {
+    this.setState({ drawerEl: null });
   }
 
   handleProfileMenuOpen = event => {
@@ -149,11 +71,14 @@ class SearchAppBar extends React.Component {
     this.setState({ mobileMoreAnchorEl: null });
   };
 
+  /***** RENDER METHODS *****/
+
   render() {
-    const { anchorEl, mobileMoreAnchorEl, drawerOpen } = this.state;
+    const { anchorEl, mobileMoreAnchorEl, drawerEl } = this.state;
     const { classes } = this.props;
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+    const isDrawerOpen = Boolean(drawerEl);
 
     const renderMenu = (
       <Menu className={classes.floatObj}
@@ -176,7 +101,7 @@ class SearchAppBar extends React.Component {
         open={isMobileMenuOpen}
         onClose={this.handleMenuClose}
       >
-        <MenuItem onClick={this.handleMobileMenuClose}>
+        <MenuItem onClick={this.handleMobileMenuClose} component={Link} to="/inbox">
           <IconButton color="inherit">
             <Badge badgeContent={4} color="secondary">
               <MailIcon />
@@ -203,7 +128,9 @@ class SearchAppBar extends React.Component {
 
     const renderDrawerMenu = (
       <Drawer
-        open={drawerOpen}
+        drawerEl={drawerEl}
+        open={isDrawerOpen}
+        onClose={this.handleDrawerClose}
         className={classes.drawer}
         variant="temporary"
         classes={{
@@ -212,11 +139,11 @@ class SearchAppBar extends React.Component {
       >
         <div className={classes.toolbar} />
         <List>
-          <ListItem button key='New Lessons'>
+          <ListItem button key='New Lessons' onClick={this.handleDrawerClose} component={Link} to="/">
             <ListItemIcon><FiberNewIcon color='error' style={{ fontSize: 30 }} /></ListItemIcon>
             <ListItemText primary='New Lessons' />
           </ListItem>
-          <ListItem button key='Syllabus'>
+          <ListItem button key='Syllabus' onClick={this.handleDrawerClose} component={Link} to="/syllabus">
             <ListItemIcon><BookIcon style={{ fontSize: 30 }} /></ListItemIcon>
             <ListItemText primary='Syllabus' />
           </ListItem>
@@ -231,12 +158,14 @@ class SearchAppBar extends React.Component {
         </List>
         <Divider />
         <List>
-          {['Billing', 'Help'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <CreditCardIcon style={{ fontSize: 30 }} /> : <RecordVoiceOverIcon style={{ fontSize: 30 }} />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
+          <ListItem button key='Billing'>
+            <ListItemIcon><CreditCardIcon style={{ fontSize: 30 }} /></ListItemIcon>
+            <ListItemText primary='Billing' />
+          </ListItem>
+          <ListItem button key='Help'>
+            <ListItemIcon><RecordVoiceOverIcon style={{ fontSize: 30 }} /></ListItemIcon>
+            <ListItemText primary='Help' />
+          </ListItem>
         </List>
       </Drawer>
     );
@@ -246,7 +175,7 @@ class SearchAppBar extends React.Component {
         <AppBar position="fixed" className={classes.appBar}>
           <Toolbar>
             <IconButton className={classes.menuButton} color="inherit" aria-label="Open drawer"
-            onClick={this.handleDrawerFlip}>
+            onClick={isDrawerOpen ? this.handleDrawerClose : this.handleDrawerOpen}>
               <MenuIcon />
             </IconButton>
             <Typography className={classes.title} variant="h6" color="inherit" noWrap>
@@ -266,10 +195,10 @@ class SearchAppBar extends React.Component {
             </div>
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
-              <IconButton color="inherit">
-                <Badge badgeContent={4} color="secondary">
-                  <MailIcon />
-                </Badge>
+              <IconButton color="inherit" component={Link} to="/inbox">
+                  <Badge badgeContent={4} color="secondary">
+                    <MailIcon />
+                  </Badge>
               </IconButton>
               <IconButton color="inherit">
                 <Badge badgeContent={17} color="secondary">
@@ -300,8 +229,8 @@ class SearchAppBar extends React.Component {
   }
 }
 
-SearchAppBar.propTypes = {
+PrimarySearchAppBar.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(SearchAppBar);
+export default withStyles(styles)(PrimarySearchAppBar);

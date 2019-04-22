@@ -1,3 +1,21 @@
+### Material UI
+
+This site uses material-ui. https://material-ui.com/
+- PrimarySearchAppBar - https://material-ui.com/demos/app-bar/#app-bar-with-a-primary-search-field
+- ClippedDrawer - https://material-ui.com/demos/drawers/#clipped-under-the-app-bar
+- PersistentDrawerLeft - https://material-ui.com/demos/drawers/#persistent-drawer
+
+### Learning Points
+
+Key learning points from this project:
+- Navigating with React Router -https://codeburst.io/getting-started-with-react-router-5c978f70df91
+- Redirect, the React way - https://tylermcginnis.com/react-router-programmatically-navigate/
+- Web App Manifest - https://developers.google.com/web/fundamentals/web-app-manifest/
+
+---
+
+**Below are the standard README information provided by create-react-app**
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
