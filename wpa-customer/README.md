@@ -1,3 +1,10 @@
+### Before Deploying
+
+```
+npm run build
+firebase deploy
+```
+
 ### Material UI
 
 This site uses material-ui. https://material-ui.com/
