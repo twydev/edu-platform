@@ -18,6 +18,9 @@ Key learning points from this project:
 - Navigating with React Router -https://codeburst.io/getting-started-with-react-router-5c978f70df91
 - Redirect, the React way - https://tylermcginnis.com/react-router-programmatically-navigate/
 - Web App Manifest - https://developers.google.com/web/fundamentals/web-app-manifest/
+- The Twelve-Factor Methodology to managing applications - https://www.12factor.net/
+- Environment Variables - https://facebook.github.io/create-react-app/docs/adding-custom-environment-variables
+- Firebase Authentication on React - https://www.robinwieruch.de/complete-firebase-authentication-react-tutorial/
 
 ---
 

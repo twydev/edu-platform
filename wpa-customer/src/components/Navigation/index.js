@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import * as ROUTES from '../../constants/routes'
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import pink from '@material-ui/core/colors/pink';
 
 import AppBar from '@material-ui/core/AppBar';
 import Drawer from '@material-ui/core/Drawer';
@@ -32,9 +35,9 @@ import RecordVoiceOverIcon from '@material-ui/icons/RecordVoiceOver';
 import CreditCardIcon from '@material-ui/icons/CreditCard';
 import InsertPhotoIcon from '@material-ui/icons/InsertPhoto';
 
-import { styles } from './PrimarySearchAppBar_Styles'
+import { styles } from './NavigationBar_Styles'
 
-class PrimarySearchAppBar extends React.Component {
+class NavigationBar extends React.Component {
   
   /***** COMPONENTS STATES *****/
   
@@ -101,7 +104,7 @@ class PrimarySearchAppBar extends React.Component {
         open={isMobileMenuOpen}
         onClose={this.handleMenuClose}
       >
-        <MenuItem onClick={this.handleMobileMenuClose} component={Link} to="/inbox">
+        <MenuItem onClick={this.handleMobileMenuClose} component={Link} to={ROUTES.INBOX}>
           <IconButton color="inherit">
             <Badge badgeContent={4} color="secondary">
               <MailIcon />
@@ -139,11 +142,11 @@ class PrimarySearchAppBar extends React.Component {
       >
         <div className={classes.toolbar} />
         <List>
-          <ListItem button key='New Lessons' onClick={this.handleDrawerClose} component={Link} to="/">
+          <ListItem button key='New Lessons' onClick={this.handleDrawerClose} component={Link} to={ROUTES.LANDING}>
             <ListItemIcon><FiberNewIcon color='error' style={{ fontSize: 30 }} /></ListItemIcon>
             <ListItemText primary='New Lessons' />
           </ListItem>
-          <ListItem button key='Syllabus' onClick={this.handleDrawerClose} component={Link} to="/syllabus">
+          <ListItem button key='Syllabus' onClick={this.handleDrawerClose} component={Link} to={ROUTES.SYLLABUS}>
             <ListItemIcon><BookIcon style={{ fontSize: 30 }} /></ListItemIcon>
             <ListItemText primary='Syllabus' />
           </ListItem>
@@ -170,7 +173,14 @@ class PrimarySearchAppBar extends React.Component {
       </Drawer>
     );
 
+    const theme = createMuiTheme({
+      palette: {
+        primary: pink,
+      },
+    });
+
     return (
+      <MuiThemeProvider theme={theme}>
       <div className={classes.root}>
         <AppBar position="fixed" className={classes.appBar}>
           <Toolbar>
@@ -186,7 +196,7 @@ class PrimarySearchAppBar extends React.Component {
                 <SearchIcon />
               </div>
               <InputBase
-                placeholder="Search…"
+                placeholder="Search..."
                 classes={{
                   root: classes.inputRoot,
                   input: classes.inputInput,
@@ -195,7 +205,7 @@ class PrimarySearchAppBar extends React.Component {
             </div>
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
-              <IconButton color="inherit" component={Link} to="/inbox">
+              <IconButton color="inherit" component={Link} to={ROUTES.INBOX}>
                   <Badge badgeContent={4} color="secondary">
                     <MailIcon />
                   </Badge>
@@ -225,12 +235,13 @@ class PrimarySearchAppBar extends React.Component {
         {renderMobileMenu}
         {renderDrawerMenu}
       </div>
+      </MuiThemeProvider>
     );
   }
 }
 
-PrimarySearchAppBar.propTypes = {
+NavigationBar.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(PrimarySearchAppBar);
+export default withStyles(styles)(NavigationBar);

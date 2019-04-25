@@ -5,13 +5,15 @@
   "dependencies": {
     "@material-ui/core": "latest",
     "@material-ui/icons": "latest",
+    "firebase": "latest",
     "firebase-tools": "^6.7.0",
     "history": "4.7.2",
     "prop-types": "latest",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-router-dom": "4.3.1",
-    "react-scripts": "2.1.8"
+    "react-scripts": "2.1.8",
+    "recompose": "^0.30.0"
   },
   "scripts": {
     "start": "react-scripts start",
