@@ -1,0 +1,11 @@
+# virtual env for python3 and dependencies
+django-gae
+
+# other dependencies that should be manually configured
+backendProject/cloud_sql_proxy
+backendProject/db.sqlite3
+backendProject/backendProject/envvar.py
+
+# auto-generated instance-specific
+*/*/__pycache__
+*/*/migrations

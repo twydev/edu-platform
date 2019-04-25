@@ -1,6 +1,6 @@
 # dependencies
-wpa-customer/node_modules
-wpa-customer/build
-wpa-customer/package-lock.json
-wpa-customer/.firebaserc
+pwa-customer/node_modules
+pwa-customer/build
+pwa-customer/package-lock.json
+pwa-customer/.firebaserc
 material-kit-react-master
