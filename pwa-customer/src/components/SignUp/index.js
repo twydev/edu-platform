@@ -47,6 +47,9 @@ const styles = theme => ({
   submit: {
     marginTop: theme.spacing.unit * 3,
   },
+  footnote: {
+    textAlign:  'center',
+  }
 });
 
 const SignUpPage = () => (
@@ -144,7 +147,6 @@ class SignUpFormBase extends Component {
                 value={passwordOne}
                 onChange={this.onChange}
                 type="password"
-                placeholder="Password"
               />
             </FormControl>
             <FormControl margin="normal" required fullWidth>
@@ -154,7 +156,6 @@ class SignUpFormBase extends Component {
                 value={passwordTwo}
                 onChange={this.onChange}
                 type="password"
-                placeholder="Confirm Password"
               />
             </FormControl>
             <Button
@@ -179,11 +180,26 @@ SignUpFormBase.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-const SignUpLink = () => (
-  <p>
-    Don't have an account? <Link to={ROUTES.SIGN_UP}>Sign Up</Link>
-  </p>
-);
+// const SignUpLink = () => (
+//     <div>
+//       <p>
+//         Don't have an account? <Link to={ROUTES.SIGN_UP}>Sign Up</Link> now {param.main}.
+//       </p>
+//     </div>
+// );
+
+const SignUpLink = compose(
+  withStyles(styles),
+)((props) => {
+  const { classes } = props;
+  return (
+    <div className={classes.main}>
+      <p className={classes.footnote}>
+        Don't have an account? <Link to={ROUTES.SIGN_UP}>Sign Up</Link> now.
+      </p>
+    </div>
+  );
+})
 
 const SignUpForm = compose(
   withRouter,

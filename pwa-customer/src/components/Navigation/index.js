@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import * as ROUTES from '../../constants/routes'
+import SignOutButton from '../SignOut';
+
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import pink from '@material-ui/core/colors/pink';
 
@@ -74,6 +76,11 @@ class NavigationBar extends React.Component {
     this.setState({ mobileMoreAnchorEl: null });
   };
 
+  handleSignOut = () => {
+    this.handleMenuClose();
+    this.signOutHandler.signOut();
+  }
+
   /***** RENDER METHODS *****/
 
   render() {
@@ -93,6 +100,9 @@ class NavigationBar extends React.Component {
       >
         <MenuItem onClick={this.handleMenuClose}>Profile</MenuItem>
         <MenuItem onClick={this.handleMenuClose}>My account</MenuItem>
+        <MenuItem onClick={this.handleSignOut}>
+          <SignOutButton onRef={ref => (this.signOutHandler = ref)} />  Logout
+        </MenuItem>
       </Menu>
     );
 
