@@ -21,7 +21,11 @@ Key learning points from this project:
 - The Twelve-Factor Methodology to managing applications - https://www.12factor.net/
 - Environment Variables - https://facebook.github.io/create-react-app/docs/adding-custom-environment-variables
 - Firebase Authentication on React - https://www.robinwieruch.de/complete-firebase-authentication-react-tutorial/
+<<<<<<< HEAD
 - Protected Route and Authentication - https://tylermcginnis.com/react-router-protected-routes-authentication/
+=======
+- How to call child component method from parent - https://github.com/kriasoft/react-starter-kit/issues/909
+>>>>>>> 0d36b319b41a7d9d45bc3c64e92c3cc0e288b7c3
 
 ---
 
