@@ -36,13 +36,13 @@ class Firebase {
 
   doCreateUserWithEmailAndPassword = (email, password) => {
     console.log("Registered New Firebase User!");
-    this.auth.createUserWithEmailAndPassword(email, password);
+    return this.auth.createUserWithEmailAndPassword(email, password);
   }
     
 
   doSignInWithEmailAndPassword = (email, password) => {
     console.log("Firebase User Logging In!");
-    this.auth.signInWithEmailAndPassword(email, password);
+    return this.auth.signInWithEmailAndPassword(email, password);
   }
     
 

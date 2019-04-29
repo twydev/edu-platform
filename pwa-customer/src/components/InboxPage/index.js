@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import '../App/App.css';
 
 import NavigationBar from '../Navigation';
+import { withAuthorization } from '../Session';
+
+const condition = authUser => !!authUser;
 
 class InboxPage extends Component {
 
@@ -26,4 +29,4 @@ class InboxPage extends Component {
   }
 }
 
-export default InboxPage;
+export default withAuthorization(condition)(InboxPage);

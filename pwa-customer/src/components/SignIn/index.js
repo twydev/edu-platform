@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { compose } from 'recompose';
 import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
+// import { AuthUserContext } from '../Session';
 
 import { SignUpLink } from '../SignUp';
 
@@ -18,6 +19,7 @@ import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
+import { PasswordForgetLink } from '../PasswordForget';
 
 const styles = theme => ({
     main: {
@@ -54,7 +56,7 @@ const styles = theme => ({
 const SignInPage = () => (
     <div>
         <SignInForm />
-        <SignUpLink />
+        <PasswordForgetLink />
     </div>
 );
 
@@ -77,7 +79,7 @@ class SignInFormBase extends Component {
             .doSignInWithEmailAndPassword(email, password)
             .then(() => {
                 this.setState({ ...INITIAL_STATE });
-                this.props.history.push(ROUTES.LANDING);
+                this.props.history.push(ROUTES.HOME);
             })
             .catch(error => {
                 this.setState({ error });
@@ -112,6 +114,7 @@ class SignInFormBase extends Component {
                     <Typography component="h1" variant="h5">
                         Login to Platform.edu
                     </Typography>
+                    <SignUpLink />
                     <form className={classes.form} onSubmit={this.onSubmit}>
                         <FormControl margin="normal" required fullWidth>
                             <InputLabel htmlFor="email">Email Address</InputLabel>

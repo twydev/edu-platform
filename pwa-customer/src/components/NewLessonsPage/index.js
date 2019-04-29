@@ -3,6 +3,9 @@ import logo from './logo.svg';
 import './App.css';
 
 import NavigationBar from '../Navigation';
+import { withAuthorization } from '../Session';
+
+const condition = authUser => !!authUser;
 
 class NewLessons extends Component {
     render() {
@@ -22,4 +25,4 @@ class NewLessons extends Component {
     }
 }
 
-export default NewLessons;
+export default withAuthorization(condition)(NewLessons);

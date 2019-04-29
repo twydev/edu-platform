@@ -1,11 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import * as ROUTES from '../../constants/routes'
+import * as ROUTES from '../../constants/routes';
 import SignOutButton from '../SignOut';
-
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import pink from '@material-ui/core/colors/pink';
 
 import AppBar from '@material-ui/core/AppBar';
 import Drawer from '@material-ui/core/Drawer';
@@ -99,7 +96,7 @@ class NavigationBar extends React.Component {
         onClose={this.handleMenuClose}
       >
         <MenuItem onClick={this.handleMenuClose}>Profile</MenuItem>
-        <MenuItem onClick={this.handleMenuClose}>My account</MenuItem>
+        <MenuItem onClick={this.handleMenuClose} component={Link} to={ROUTES.ACCOUNT}>My account</MenuItem>
         <MenuItem onClick={this.handleSignOut}>
           <SignOutButton onRef={ref => (this.signOutHandler = ref)} />  Logout
         </MenuItem>
@@ -152,7 +149,7 @@ class NavigationBar extends React.Component {
       >
         <div className={classes.toolbar} />
         <List>
-          <ListItem button key='New Lessons' onClick={this.handleDrawerClose} component={Link} to={ROUTES.LANDING}>
+          <ListItem button key='New Lessons' onClick={this.handleDrawerClose} component={Link} to={ROUTES.HOME}>
             <ListItemIcon><FiberNewIcon color='error' style={{ fontSize: 30 }} /></ListItemIcon>
             <ListItemText primary='New Lessons' />
           </ListItem>
@@ -183,14 +180,7 @@ class NavigationBar extends React.Component {
       </Drawer>
     );
 
-    const theme = createMuiTheme({
-      palette: {
-        primary: pink,
-      },
-    });
-
     return (
-      <MuiThemeProvider theme={theme}>
       <div className={classes.root}>
         <AppBar position="fixed" className={classes.appBar}>
           <Toolbar>
@@ -245,7 +235,6 @@ class NavigationBar extends React.Component {
         {renderMobileMenu}
         {renderDrawerMenu}
       </div>
-      </MuiThemeProvider>
     );
   }
 }

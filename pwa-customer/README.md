@@ -21,6 +21,7 @@ Key learning points from this project:
 - The Twelve-Factor Methodology to managing applications - https://www.12factor.net/
 - Environment Variables - https://facebook.github.io/create-react-app/docs/adding-custom-environment-variables
 - Firebase Authentication on React - https://www.robinwieruch.de/complete-firebase-authentication-react-tutorial/
+- Protected Route and Authentication - https://tylermcginnis.com/react-router-protected-routes-authentication/
 
 ---
 

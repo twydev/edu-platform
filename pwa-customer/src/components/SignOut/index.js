@@ -19,7 +19,7 @@ class SignOutFunction extends Component {
     }
     signOut() {
         this.props.firebase.doSignOut();
-        this.props.history.push(ROUTES.SIGN_IN);
+        this.props.history.push(ROUTES.LANDING);
     }
     render() {
         return (
