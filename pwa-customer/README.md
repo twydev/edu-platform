@@ -23,6 +23,7 @@ Key learning points from this project:
 - Firebase Authentication on React - https://www.robinwieruch.de/complete-firebase-authentication-react-tutorial/
 - Protected Route and Authentication - https://tylermcginnis.com/react-router-protected-routes-authentication/
 - How to call child component method from parent - https://github.com/kriasoft/react-starter-kit/issues/909
+- React with JWT token in request - https://stackoverflow.com/questions/52870660/adding-jwt-token-to-get-request-not-working-in-react
 
 ---
 

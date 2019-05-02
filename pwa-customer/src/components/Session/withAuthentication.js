@@ -10,15 +10,30 @@ const withAuthentication = Component => {
 
             this.state = {
                 authUser: null,
+                idToken: null,
             };
         }
 
         componentDidMount() {
             this.listener = this.props.firebase.auth.onAuthStateChanged(
                 authUser => {
-                    authUser
-                        ? this.setState({ authUser })
-                        : this.setState({ authUser: null });
+                    if (authUser) {
+                        authUser.getIdToken()
+                            .then((idToken)=>{
+                                this.setState( {
+                                    authUser,
+                                    idToken,
+                                })
+                            })
+                            .catch((error)=>{
+                                console.log(error);
+                            })
+                    } else {
+                        this.setState({
+                            authUser: null,
+                            idToken: null,
+                        })
+                    }
                 },
             );
         }
@@ -29,7 +44,7 @@ const withAuthentication = Component => {
 
         render() {
             return (
-                <AuthUserContext.Provider value={this.state.authUser}>
+                <AuthUserContext.Provider value={this.state}>
                     <Component {...this.props} />
                 </AuthUserContext.Provider>
             );
