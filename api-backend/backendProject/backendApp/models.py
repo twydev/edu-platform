@@ -2,7 +2,7 @@ from django.db import models
 
 # Create your models here.
 class Lesson(models.Model):
-    lesson_code = models.CharField(max_length=100)
+    lesson_code = models.CharField(max_length=100, default='00000')
     lesson_name = models.CharField(max_length=200)
     pub_date = models.DateTimeField('date published')
 

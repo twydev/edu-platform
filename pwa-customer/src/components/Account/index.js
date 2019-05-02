@@ -6,6 +6,7 @@ import SwipeableViews from 'react-swipeable-views';
 import { AuthUserContext, withAuthorization } from '../Session';
 import { withFirebase } from '../Firebase';
 import PasswordChangeForm from '../PasswordChange';
+import PasswordForgetForm from '../PasswordForget';
 import NavigationBar from '../Navigation';
 
 import { withStyles } from '@material-ui/core';
@@ -16,19 +17,23 @@ import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import Avatar from '@material-ui/core/Avatar';
+import AccountCircle from '@material-ui/icons/AccountCircle';
+import MailIcon from '@material-ui/icons/Mail';
+
 const styles = theme => ({
-  root: {
-    marginTop: theme.spacing.unit * 10,
-    backgroundColor: theme.palette.background.paper,
-    width: 500,
-    display: 'flex',
-    display: 'flex',
-    flexDirection: 'column',
-    padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px`,
-  },
+  // root: {
+  //   marginTop: theme.spacing.unit * 10,
+  //   backgroundColor: theme.palette.background.paper,
+  //   width: 500,
+  // },
   main: {
     width: 'auto',
     display: 'block', // Fix IE 11 issue.
+    marginTop: theme.spacing.unit * 10,
     marginLeft: theme.spacing.unit * 3,
     marginRight: theme.spacing.unit * 3,
     [theme.breakpoints.up(400 + theme.spacing.unit * 3 * 2)]: {
@@ -38,7 +43,7 @@ const styles = theme => ({
     },
   },
   paper: {
-    marginTop: theme.spacing.unit * 8,
+    marginTop: theme.spacing.unit * 4,
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -49,7 +54,7 @@ const styles = theme => ({
     backgroundColor: theme.palette.secondary.main,
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
+    // width: '100%', // Fix IE 11 issue.
     marginTop: theme.spacing.unit,
   },
   submit: {
@@ -57,7 +62,16 @@ const styles = theme => ({
   },
   footnote: {
     textAlign: 'center',
-  }
+  },
+  title: {
+    textAlign: 'center',
+    marginBottom: theme.spacing.unit * 4,
+  },
+  listview: {
+    width: '100%',
+    maxWidth: 360,
+    backgroundColor: theme.palette.background.paper,
+  },
 });
 
 // TODO: User information querying should be moved somewhere else
@@ -96,28 +110,44 @@ class AccountPageBase extends Component {
         this.props.firebase.user(authUser.uid).off();
     }
 
+
+    profileList() {
+      const { userdata } = this.state;
+      const { classes } = this.props;
+      return (
+        <Paper className={classes.paper}>
+          <Typography component="h1" variant="h5" className={classes.title}>
+            Your Profile
+          </Typography> 
+        <List className={classes.listview}>
+          <ListItem>
+            <Avatar>
+              <AccountCircle />
+            </Avatar>
+            <ListItemText primary="Username" secondary={userdata.username} />
+          </ListItem>
+          <ListItem>
+            <Avatar>
+              <MailIcon />
+            </Avatar>
+            <ListItemText primary="Email Address" secondary={userdata.email} />
+          </ListItem>
+        </List>
+        </Paper>
+      )
+    }
+
     render() {
         const { classes, theme } = this.props; 
-        const { loading, userdata } = this.state;
-
-        const renderAccountDetails = (
-          <main className={classes.main}>
-            <CssBaseline />
-            <Paper className={classes.paper}>
-              <Typography component="h1" variant="h5">
-                Account Details
-              </Typography>
-            </Paper>
-          </main>
-        )
+        const { loading, userdata, value } = this.state;
 
         const renderTab = (
           <main className={classes.main}>
             <CssBaseline />
-            <div className={classes.root}>
+
               <AppBar position="static" color="default">
                 <Tabs
-                  value={this.state.value}
+                  value={value}
                   onChange={this.handleChange}
                   indicatorColor="primary"
                   textColor="primary"
@@ -127,67 +157,42 @@ class AccountPageBase extends Component {
                   <Tab label="Password" />
                 </Tabs>
               </AppBar>
-              <SwipeableViews
-                axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
-                index={this.state.value}
-                onChangeIndex={this.handleChangeIndex}
-              >
-                <Typography component="div" dir={theme.direction} style={{ padding: 8 * 3 }}>
-                  {userInfo}
-                </Typography>
-                <Typography component="div" dir={theme.direction} style={{ padding: 8 * 3 }}>
-                  Reset Password
-                </Typography>
-              </SwipeableViews>
-            </div>
+              
+                <SwipeableViews
+                  axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
+                  index={this.state.value}
+                  onChangeIndex={this.handleChangeIndex}
+                >
+                {loading ?  <Typography component="div" style={{ padding: 8 * 3 }}>
+                                              Loading...
+                                            </Typography> 
+                                         : this.profileList()}
+                  <PasswordChangeForm />
+                </SwipeableViews>
+              
           </main>
         )
-
-        const userInfo = () => {
-          console.log(loading, userdata)
-          if (loading) {
-            return (<div>Loading ...</div>)
-          } else {
-            return (
-            <div>
-              <ul>
-                <li>
-                  <span>
-                    <strong>Username:</strong> {userdata.username}
-                  </span>
-                </li>
-                <li>
-                  <span>
-                    <strong>Email:</strong> {userdata.email}
-                  </span>
-                </li>
-              </ul>
-            </div>)
-          }
-        }
 
         return (
           <div>
               <NavigationBar />
-              {/* {renderAccountDetails} */}
               {renderTab}
-              <PasswordChangeForm />
           </div>
         );
     }
 }
 
+
 AccountPageBase.contextType = AuthUserContext;
 AccountPageBase.propTypes = {
   classes: PropTypes.object.isRequired,
-  theme: PropTypes.object.isRequired,
 }
 
 const condition = authUser => !!authUser;
 
 const AccountPage = compose(
     withFirebase,
-    withStyles(styles, { withTheme: true }),
+    withStyles(styles, { withTheme: true}),
     withAuthorization(condition),
 )(AccountPageBase)
 

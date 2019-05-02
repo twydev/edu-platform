@@ -11,6 +11,7 @@ This site uses material-ui. https://material-ui.com/
 - PrimarySearchAppBar - https://material-ui.com/demos/app-bar/#app-bar-with-a-primary-search-field
 - ClippedDrawer - https://material-ui.com/demos/drawers/#clipped-under-the-app-bar
 - PersistentDrawerLeft - https://material-ui.com/demos/drawers/#persistent-drawer
+- Full-width Fixed Tab - https://material-ui.com/demos/tabs/#full-width
 
 ### Learning Points
 
@@ -24,6 +25,11 @@ Key learning points from this project:
 - Protected Route and Authentication - https://tylermcginnis.com/react-router-protected-routes-authentication/
 - How to call child component method from parent - https://github.com/kriasoft/react-starter-kit/issues/909
 - React with JWT token in request - https://stackoverflow.com/questions/52870660/adding-jwt-token-to-get-request-not-working-in-react
+- JSON response undefined - https://stackoverflow.com/questions/33237200/fetch-response-json-gives-responsedata-undefined
+
+### Troubleshooting
+
+- Increasing amount of inotify watchers - https://github.com/guard/listen/wiki/Increasing-the-amount-of-inotify-watchers
 
 ---
 

@@ -95,7 +95,6 @@ class NavigationBar extends React.Component {
         open={isMenuOpen}
         onClose={this.handleMenuClose}
       >
-        <MenuItem onClick={this.handleMenuClose}>Profile</MenuItem>
         <MenuItem onClick={this.handleMenuClose} component={Link} to={ROUTES.ACCOUNT}>My account</MenuItem>
         <MenuItem onClick={this.handleSignOut}>
           <SignOutButton onRef={ref => (this.signOutHandler = ref)} />  Logout
