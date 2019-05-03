@@ -4,7 +4,6 @@ import { compose } from 'recompose';
 
 import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
-import NavigationBar from '../Navigation';
 
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -50,12 +49,6 @@ const styles = theme => ({
         textAlign: 'center',
     }
 });
-
-const PasswordForgetPage = () => (
-    <div>
-        <PasswordForgetForm />
-    </div>
-);
 
 const INITIAL_STATE = {
     email: '',
@@ -149,11 +142,11 @@ const PasswordForgetLink = compose(
     );
 })
 
-export default PasswordForgetPage;
-
 const PasswordForgetForm = compose(
   withFirebase,
   withStyles(styles),
 )(PasswordForgetFormBase)
 
-export { PasswordForgetForm, PasswordForgetLink };
+export default PasswordForgetForm;
+
+export { PasswordForgetLink };

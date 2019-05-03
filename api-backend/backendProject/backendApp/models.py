@@ -7,7 +7,7 @@ class Lesson(models.Model):
     pub_date = models.DateTimeField('date published')
 
     def __str__(self):
-        return self.lesson_name
+        return self.lesson_code + ' - ' + self.lesson_name
 
 class Enrolled(models.Model):
     ENROLL_STATUS = (

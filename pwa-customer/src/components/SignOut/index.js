@@ -7,10 +7,6 @@ import * as ROUTES from '../../constants/routes';
 import PowerIcon from '@material-ui/icons/PowerSettingsNew';
 
 class SignOutFunction extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     componentDidMount() {
         this.props.onRef(this)
     }

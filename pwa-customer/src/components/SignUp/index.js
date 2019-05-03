@@ -88,7 +88,11 @@ class SignUpFormBase extends Component {
       })
       .then(authUser => {
         this.setState({ ...INITIAL_STATE });
-        this.props.history.push(ROUTES.HOME);
+        return this.props.firebase.doSendVerificationEmail();
+      }).then(() => {
+        console.log('Verification Email Sent!')
+        this.props.firebase.doSignOut();
+        this.props.history.push(ROUTES.SIGN_IN);
       })
       .catch(error => {
         this.setState({ error });

@@ -5,10 +5,15 @@
 - Django REST Framework quickstart - https://www.django-rest-framework.org/tutorial/quickstart/
 - Troubleshoot installation of MySqlClient - https://pypi.org/project/mysqlclient/
 - Enable CORS on server - https://www.techiediaries.com/django-cors/
+- Django referencing User model - https://wsvincent.com/django-referencing-the-user-model/
+- Django Settings References - https://docs.djangoproject.com/en/2.2/ref/settings/
+- Django Securing the admin site - https://opensource.com/article/18/1/10-tips-making-django-admin-more-secure
 
 NOTE: BETTER PREPARE A REQUIREMENTS FILE for this project's dependencies
 - MySqlClient
 - Django REST Framework
+
+NOTE: also need to find a way to serve static files in production environment
 
 remember to use python3 virtual env (initial creation)
 - virtualenv -p python3 django-gae

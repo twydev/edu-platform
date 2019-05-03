@@ -26,6 +26,7 @@ Key learning points from this project:
 - How to call child component method from parent - https://github.com/kriasoft/react-starter-kit/issues/909
 - React with JWT token in request - https://stackoverflow.com/questions/52870660/adding-jwt-token-to-get-request-not-working-in-react
 - JSON response undefined - https://stackoverflow.com/questions/33237200/fetch-response-json-gives-responsedata-undefined
+- Firebase email actions handler - https://firebase.google.com/docs/auth/custom-email-handler
 
 ### Troubleshooting
 

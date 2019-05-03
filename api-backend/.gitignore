@@ -5,6 +5,7 @@ django-gae
 backendProject/cloud_sql_proxy
 backendProject/db.sqlite3
 backendProject/backendProject/envvar.py
+backendProject/backendProject/platform-edu-firebase*
 
 # auto-generated instance-specific
 */*/__pycache__

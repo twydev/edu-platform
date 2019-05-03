@@ -6,7 +6,6 @@ import SwipeableViews from 'react-swipeable-views';
 import { AuthUserContext, withAuthorization } from '../Session';
 import { withFirebase } from '../Firebase';
 import PasswordChangeForm from '../PasswordChange';
-import PasswordForgetForm from '../PasswordForget';
 import NavigationBar from '../Navigation';
 
 import { withStyles } from '@material-ui/core';
@@ -139,7 +138,7 @@ class AccountPageBase extends Component {
 
     render() {
         const { classes, theme } = this.props; 
-        const { loading, userdata, value } = this.state;
+        const { loading, value } = this.state;
 
         const renderTab = (
           <main className={classes.main}>
@@ -160,7 +159,7 @@ class AccountPageBase extends Component {
               
                 <SwipeableViews
                   axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
-                  index={this.state.value}
+                  index={value}
                   onChangeIndex={this.handleChangeIndex}
                 >
                 {loading ?  <Typography component="div" style={{ padding: 8 * 3 }}>

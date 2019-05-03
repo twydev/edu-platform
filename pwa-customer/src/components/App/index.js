@@ -9,7 +9,7 @@ import LandingPage from '../Landing';
 import NewLesson from '../NewLessonsPage';
 import SignUpPage from '../SignUp';
 import SignInPage from '../SignIn';
-import PasswordForgetPage from '../PasswordForget';
+import PasswordForgetForm from '../PasswordForget';
 import AccountPage from '../Account';
 import NotFound from '../../404';
 // import ProtectedRoute from '../ProtectedRoute';
@@ -38,7 +38,7 @@ class App extends Component {
                     <Route exact path={ROUTES.SIGN_IN} component={SignInPage} />
                     <Route exact path={ROUTES.INBOX} component={InboxPage} />
                     <Route exact path={ROUTES.HOME} component={NewLesson} />
-                    <Route exact path={ROUTES.PASSWORD_FORGET} component={PasswordForgetPage} />
+                    <Route exact path={ROUTES.PASSWORD_FORGET} component={PasswordForgetForm} />
                     <Route exact path={ROUTES.ACCOUNT} component={AccountPage} />
                     {/* <Route path={ROUTES.ADMIN} component={AdminPage} /> */}
                     <Route component={NotFound} />

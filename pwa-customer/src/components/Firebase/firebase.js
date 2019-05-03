@@ -40,7 +40,11 @@ class Firebase {
     console.log("Registered New Firebase User!");
     return this.auth.createUserWithEmailAndPassword(email, password);
   }
-    
+
+  doSendVerificationEmail = () => {
+    console.log("Sending Verification Email!");
+    return this.auth.currentUser.sendEmailVerification();
+  }
 
   doSignInWithEmailAndPassword = (email, password) => {
     console.log("Firebase User Logging In!");

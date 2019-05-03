@@ -15,19 +15,18 @@ from .envvar import envvar as env
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
+__location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '0bz5-(qp406_qxq04k_6p$w2+y0%tn_6()vwl6&&6j_&g!9nw$'
+SECRET_KEY = env.SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -74,6 +73,7 @@ TEMPLATES = [
 
 CORS_ORIGIN_ALLOW_ALL = True
 
+
 WSGI_APPLICATION = 'backendProject.wsgi.application'
 
 # REST API Framework Settings
@@ -82,7 +82,10 @@ REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': (
         'rest_framework.renderers.JSONRenderer',
         'rest_framework.renderers.BrowsableAPIRenderer',
-    )
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_firebase.authentication.FirebaseAuthentication',
+    ),
 }
 
 # REST_FRAMEWORK = {
@@ -93,6 +96,10 @@ REST_FRAMEWORK = {
 #     # that corresponds to the version requested in the incoming client request.
 #     'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.URLPathVersioning',
 # }
+
+FIREBASE_AUTH = {
+    'FIREBASE_ACCOUNT_KEY_FILE': os.path.join(__location__, env.FIREBASE_CREDENTIALS),
+}
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
@@ -185,4 +192,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
+# All settings common to all environments
+# PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')

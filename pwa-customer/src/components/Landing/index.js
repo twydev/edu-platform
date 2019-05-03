@@ -72,10 +72,6 @@ const cards = [
 ];
 
 class LandingPage extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         const { classes } = this.props;
 
