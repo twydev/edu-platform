@@ -34,6 +34,10 @@ create new migration files from updated data models
 - python manage.py makemigrations [django-app]
 - python manage.py migrate
 
+before deploying to production
+- set Debug = False in settings
+- python manage.py collectstatic
+
 Structure:
 ```
 backendProject/
